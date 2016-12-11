@@ -3,6 +3,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by thanksdanny on 09/12/2016.
@@ -12,16 +14,20 @@ public class TankClient extends Frame {
     public static final int GAME_WIDTH  = 800;
     public static final int GAME_HEIGHT = 600;
 
-    int x = 50, y = 50;
-
+    Tank myTank = new Tank(50, 50, this);
+    List<Missile> missiles = new ArrayList<Missile>();
     Image offScreenImage = null;
 
     @Override
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(x, y, 30, 30); // 画圆
-        g.setColor(c);
+        g.drawString("missiles count:" + missiles.size(), 60, 60);
+
+        // 画炮弹
+        for (int i = 0; i < missiles.size(); i++) {
+            Missile m = missiles.get(i);
+            m.draw(g);
+        }
+        myTank.draw(g);
     }
 
     @Override
@@ -80,21 +86,12 @@ public class TankClient extends Frame {
     private class KeyMonitor extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
-            int key = e.getKeyCode();
-            switch (key) {
-                case KeyEvent.VK_LEFT:
-                    x -= 5;
-                    break;
-                case KeyEvent.VK_UP:
-                    y -= 5;
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    x += 5;
-                    break;
-                case KeyEvent.VK_DOWN:
-                    y += 5;
-                    break;
-            }
+            myTank.keyPressed(e);
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            myTank.keyReleased(e);
         }
     }
 
