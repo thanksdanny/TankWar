@@ -25,6 +25,8 @@ public class TankClient extends Frame {
         // 画炮弹
         for (int i = 0; i < missiles.size(); i++) {
             Missile m = missiles.get(i);
+//            if (!m.isLive()) missiles.remove(m);
+//            else m.draw(g);
             m.draw(g);
         }
         myTank.draw(g);
