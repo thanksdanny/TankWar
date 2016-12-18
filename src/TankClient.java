@@ -27,6 +27,8 @@ public class TankClient extends Frame {
 
     Image offScreenImage = null;
 
+    Blood b = new Blood();
+
     // 初始化窗口
     public void lauchFrame() {
 
@@ -87,6 +89,7 @@ public class TankClient extends Frame {
         myTank.draw(g);
         w1.draw(g);
         w2.draw(g);
+        b.draw(g);
     }
 
     @Override
@@ -112,7 +115,7 @@ public class TankClient extends Frame {
             while (true) {
                 repaint();
                 try {
-                    Thread.sleep(20);
+                    Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

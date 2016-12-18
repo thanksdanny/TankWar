@@ -15,6 +15,7 @@ public class Tank {
 
     // 成员变量
     private boolean live = true;
+    private BloodBar bb = new BloodBar();
 
     private int life = 100;
 
@@ -93,6 +94,10 @@ public class Tank {
         }
         g.fillOval(x, y, WIDTH, HEIGHT);
         g.setColor(c);
+
+        if (good) {
+            bb.draw(g);
+        }
 
         switch(ptDir) {
             case L:
@@ -318,6 +323,18 @@ public class Tank {
         Direction[] dirs = Direction.values();
         for (int i = 0; i < 8; i++) {
             fire(dirs[i]);
+        }
+    }
+
+
+    private class BloodBar {
+        public void draw (Graphics g) {
+            Color c = g.getColor();
+            g.setColor(Color.red);
+            g.drawRect(x, y - 10, WIDTH, 10);
+            int w = WIDTH * life / 100;
+            g.fillRect(x, y - 10, w, 10);
+            g.setColor(c);
         }
     }
 }
